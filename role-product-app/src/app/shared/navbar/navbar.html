@@ -1,0 +1,11 @@
+<mat-toolbar color="primary" *ngIf="isLoggedIn()">
+    <span *ngIf="isAdmin()">Welcome Admin</span>
+    <span *ngIf="!isAdmin()">Welcome User</span>
+  
+    <span class="spacer"></span>
+  
+    <a mat-button routerLink="/products">Products</a>
+    <a mat-button routerLink="/products/create" *ngIf="isAdmin()">Add Product</a>
+    <a mat-button (click)="logout()">Logout</a>
+  </mat-toolbar>
+  

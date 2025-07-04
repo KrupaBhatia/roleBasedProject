@@ -1,0 +1,31 @@
+<h2>{{ isEditMode ? 'Edit' : 'Add' }} Product</h2>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-error *ngIf="productForm.get('name')?.hasError('required')">
+    Name is required
+  </mat-error>
+  
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Price</mat-label>
+    <input matInput type="number" formControlName="price" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+    {{ isEditMode ? 'Update' : 'Create' }}
+  </button>
+  
+  <button mat-button (click)="cancel()">Cancel</button>
+
+</form>
