@@ -26,27 +26,35 @@ export class Signup {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      role: ['user', Validators.required] 
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      role: ['user', Validators.required]
     });
+    
+
+    console.log(this.signupForm);
   }
 
+  
+  
   onSubmit(): void {
     if (this.signupForm.invalid) return;
-
+  
     this.loading = true;
+  
     this.authService.signup(this.signupForm.value).subscribe({
       next: (res) => {
+        this.successMsg = 'User registered successfully!';
+        this.errorMsg = '';
         this.loading = false;
-        this.successMsg = 'Signup successful. You can now login.';
         this.signupForm.reset();
-        setTimeout(() => this.router.navigate(['/auth/login']), 1500);
       },
       error: (err) => {
-        this.loading = false;
         this.errorMsg = err.error?.message || 'Signup failed';
+        this.successMsg = '';
+        this.loading = false;
       }
     });
   }
+  
 
 }

@@ -1,10 +1,37 @@
+.product-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.product-form-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
 .full-width {
-    width: 100%;
-    margin-bottom: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
   }
-  
-  .product-form {
-    max-width: 500px;
-    margin: auto;
-  }
-  
+}

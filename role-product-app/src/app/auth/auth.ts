@@ -23,6 +23,7 @@ export class Auth {
     return this.loggedIn.asObservable();
   }
 
+
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`, credentials).pipe(
       tap((res: any) => {
@@ -34,7 +35,11 @@ export class Auth {
   }
 
   signup(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/signup`, data);
+    return this.http.post(`${this.apiUrl}/users/create-user`, data).pipe(
+      tap((res) => {
+        console.log('User created:', res);
+      })
+    );
   }
 
   logout(): void {

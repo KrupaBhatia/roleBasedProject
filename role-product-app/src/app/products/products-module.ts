@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCardModule
   ]
 })
 export class ProductsModule { }

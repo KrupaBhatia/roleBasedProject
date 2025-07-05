@@ -1,26 +1,32 @@
-<div class="container mt-5" style="max-width: 400px;">
-    <h3 class="mb-4 text-center">Login</h3>
-  
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="fill" class="w-100 mb-3">
+<div class="login-container">
+  <mat-card class="login-card">
+    <h3 class="mat-headline text-center">Login</h3>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" type="email" required />
         <mat-error *ngIf="loginForm.get('email')?.invalid">Valid email is required</mat-error>
       </mat-form-field>
-  
-      <mat-form-field appearance="fill" class="w-100 mb-3">
+
+      <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input matInput formControlName="password" type="password" required />
         <mat-error *ngIf="loginForm.get('password')?.invalid">Password is required</mat-error>
       </mat-form-field>
-  
-      <button mat-raised-button color="primary" class="w-100 mt-2" type="submit" [disabled]="loading">
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="loading">
         {{ loading ? 'Logging in...' : 'Login' }}
       </button>
-  
-      <div *ngIf="errorMsg" class="text-danger mt-2 text-center">
+
+      <div class="text-center mt-2">
+        <span>New user?</span>
+        <button mat-button color="accent" routerLink="/auth/signup">Sign Up</button>
+      </div>
+
+      <div *ngIf="errorMsg" class="error-msg">
         {{ errorMsg }}
       </div>
     </form>
-  </div>
-  
+  </mat-card>
+</div>

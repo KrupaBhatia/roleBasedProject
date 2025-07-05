@@ -18,6 +18,21 @@ export class ProductList implements OnInit {
     this.loadProducts();
   }
 
+
+  // for testing global error handling 
+
+  // ngOnInit(): void {
+  //   this.productService.getBrokenProductList().subscribe({
+  //     next: (res) => {
+  //       console.log('Should not get here');
+  //     },
+  //     error: (err) => {
+  //       console.error('Component error caught:', err);
+  //     }
+  //   });
+  // }
+  
+
   loadProducts(): void {
     this.productService.getAllProducts().subscribe({
       next: (res: any) => {

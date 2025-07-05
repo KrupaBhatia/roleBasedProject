@@ -29,4 +29,9 @@ export class Product {
   deleteProduct(id: string): Observable<any> {
     return this.http.put(`${this.baseUrl}/delete/${id}`, {});
   }
+
+  // testing global handling 
+  getBrokenProductList(): Observable<any> {
+    return this.http.get('http://localhost:8000/api/products/this-endpoint-does-not-exist');
+  }
 }

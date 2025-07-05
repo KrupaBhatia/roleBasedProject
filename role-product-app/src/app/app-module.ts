@@ -8,6 +8,10 @@ import { Navbar } from './shared/navbar/navbar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+
+import { ErrorInterceptor } from './core/interceptors/error-interceptor.js';
 
 
 @NgModule({
@@ -21,12 +25,19 @@ import { MatIconModule } from '@angular/material/icon';
     HttpClientModule,
     MatButtonModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatCardModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     }
 

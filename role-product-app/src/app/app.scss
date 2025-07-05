@@ -1,0 +1,41 @@
+/* src/styles.scss */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    height: 100%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .container,
+    .login-card,
+    .product-form,
+    mat-form-field {
+      width: 100% !important;
+      margin: 0 auto;
+    }
+  
+    .mat-form-field {
+      font-size: 14px;
+    }
+  
+    h2, h3 {
+      font-size: 20px;
+      text-align: center;
+    }
+  
+    button {
+      font-size: 14px;
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  
