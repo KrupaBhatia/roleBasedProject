@@ -1,11 +1,19 @@
-<mat-toolbar color="primary" *ngIf="isLoggedIn()">
-    <span *ngIf="isAdmin()">Welcome Admin</span>
-    <span *ngIf="!isAdmin()">Welcome User</span>
+<!-- navbar.component.html -->
+<mat-toolbar color="primary" class="mat-elevation-z4 navbar-toolbar">
+    <button mat-icon-button (click)="toggleMenu()" disableRipple class="menu-button">
+        <mat-icon>menu</mat-icon>
+      </button>
+      
+  
+    <span class="user-label">{{ isAdminUser ? 'Welcome Admin' : 'Welcome User' }}</span>
   
     <span class="spacer"></span>
   
-    <a mat-button routerLink="/products">Products</a>
-    <a mat-button routerLink="/products/create" *ngIf="isAdmin()">Add Product</a>
-    <a mat-button (click)="logout()">Logout</a>
+    <nav class="nav-links" [class.show]="menuOpen">
+      <a mat-button routerLink="/products" (click)="closeMenu()">Products</a>
+      <a mat-button routerLink="/products/create" *ngIf="isAdmin()" (click)="closeMenu()">Add Product</a>
+      <a mat-button routerLink="/users/create" *ngIf="isAdmin()" (click)="closeMenu()">Create User</a>
+      <a mat-button (click)="logout(); closeMenu()">Logout</a>
+    </nav>
   </mat-toolbar>
   

@@ -1,43 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from '../product.js';
 import { Auth } from '../../auth/auth.js'; 
+import { ToastService } from '../../core/services/toast.js';
+
 @Component({
   selector: 'app-product-list',
   standalone: false,
   templateUrl: './product-list.html',
-  styleUrl: './product-list.scss'
+  styleUrls: ['./product-list.scss']
 })
 export class ProductList implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
   admin: boolean = false;
+  displayedColumns: string[] = [];
 
-  constructor(private productService: Product,private auth: Auth,) {}
+  constructor(private productService: Product, private auth: Auth) {}
 
   ngOnInit(): void {
-    this.admin = this.auth.isAdmin();  
+    this.admin = this.auth.isAdmin();
+
+    this.displayedColumns = this.admin
+      ? ['name', 'price', 'description', 'actions']
+      : ['name', 'price', 'description'];
+
     this.loadProducts();
   }
-
-
-  // for testing global error handling 
-
-  // ngOnInit(): void {
-  //   this.productService.getBrokenProductList().subscribe({
-  //     next: (res) => {
-  //       console.log('Should not get here');
-  //     },
-  //     error: (err) => {
-  //       console.error('Component error caught:', err);
-  //     }
-  //   });
-  // }
-  
 
   loadProducts(): void {
     this.productService.getAllProducts().subscribe({
       next: (res: any) => {
         this.products = res.data;
-        console.log(this.products, "23");
       },
       error: (err) => {
         console.error('Error fetching products:', err);
@@ -47,14 +40,8 @@ export class ProductList implements OnInit {
 
   delete(id: string): void {
     if (confirm('Are you sure you want to delete this product?')) {
-      this.productService.deleteProduct(id).subscribe({
-        next: () => {
-          this.loadProducts(); // refresh after delete
-        },
-        error: (err) => {
-          console.error('Error deleting product:', err);
-        }
-      });
+      this.productService.deleteProduct(id).subscribe(() => this.loadProducts());
     }
   }
+  
 }

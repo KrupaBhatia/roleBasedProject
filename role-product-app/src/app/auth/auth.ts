@@ -6,23 +6,18 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-
-
 export class Auth {
-
   private apiUrl = 'http://localhost:8000/api';
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
+
+  // Expose observable to components
+  isLoggedIn$ = this.loggedIn.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {}
 
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
   }
-
-  isLoggedIn(): Observable<boolean> {
-    return this.loggedIn.asObservable();
-  }
-
 
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`, credentials).pipe(
@@ -32,6 +27,10 @@ export class Auth {
         this.loggedIn.next(true);
       })
     );
+  }
+
+  isLoggedIn(): boolean {
+    return this.hasToken();
   }
 
   signup(data: any): Observable<any> {
@@ -58,7 +57,6 @@ export class Auth {
   }
 
   isAdmin(): boolean {
-    return localStorage.getItem('role') === 'admin';
+    return this.getRole() === 'admin';
   }
-  
 }

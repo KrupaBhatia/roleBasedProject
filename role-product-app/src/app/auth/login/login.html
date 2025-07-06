@@ -19,11 +19,6 @@
         {{ loading ? 'Logging in...' : 'Login' }}
       </button>
 
-      <div class="text-center mt-2">
-        <span>New user?</span>
-        <button mat-button color="accent" routerLink="/auth/signup">Sign Up</button>
-      </div>
-
       <div *ngIf="errorMsg" class="error-msg">
         {{ errorMsg }}
       </div>

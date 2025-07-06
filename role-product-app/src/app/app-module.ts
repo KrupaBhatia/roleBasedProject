@@ -4,14 +4,21 @@ import { AppRoutingModule } from './app-routing-module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 import { App } from './app';
 import { TokenInterceptor } from './core/interceptors/token-interceptor.js';
-import { Navbar } from './shared/navbar/navbar'; 
+import { Navbar } from './shared/navbar/navbar.js'; 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 
+import { MatSidenavModule } from '@angular/material/sidenav';
+
+import { MatListModule } from '@angular/material/list';
+
+
+
 import { ErrorInterceptor } from './core/interceptors/error-interceptor.js';
+
 
 
 @NgModule({
@@ -27,7 +34,9 @@ import { ErrorInterceptor } from './core/interceptors/error-interceptor.js';
     MatIconModule,
     MatToolbarModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [
     {

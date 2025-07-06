@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Auth } from '../../auth/auth.js';
+import { Component, OnInit } from '@angular/core';
+import { Auth } from '../../auth/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -8,20 +7,35 @@ import { Auth } from '../../auth/auth.js';
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss'
 })
-export class Navbar {
+export class Navbar implements OnInit {
+  isLoggedIn = false;
+  isAdminUser = false;
 
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(private auth: Auth) {}
 
-  isLoggedIn(): boolean {
-    return !!this.auth.getToken();
+  ngOnInit(): void {
+    this.auth.isLoggedIn$.subscribe(status => {
+      this.isLoggedIn = status;
+      this.isAdminUser = this.auth.isAdmin();
+    });
   }
-  
-  isAdmin(): boolean {
-    return this.auth.isAdmin();
-  }
-  
+
+
+  menuOpen = false;
+
+toggleMenu() {
+  this.menuOpen = !this.menuOpen;
+}
+
+closeMenu() {
+  this.menuOpen = false;
+}
+
   logout(): void {
     this.auth.logout();
   }
 
+  isAdmin(): boolean {
+    return this.isAdminUser;
+  }
 }

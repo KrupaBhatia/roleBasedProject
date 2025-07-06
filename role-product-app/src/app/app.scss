@@ -39,3 +39,40 @@
     }
   }
   
+
+  .snackbar-success {
+    background-color: #4caf50; // Green
+    color: #fff;
+  }
+  
+  .snackbar-error {
+    background-color: #f44336; // Red
+    color: #fff;
+  }
+  
+  .snackbar-info {
+    background-color: #2196f3; // Blue
+    color: #fff;
+  }
+
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  app-navbar,
+  mat-sidenav-container {
+    height: 100%;
+    width: 100%;
+  }
+  
+  
+  

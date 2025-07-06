@@ -8,6 +8,6 @@ const router = express.Router();
 
 const { createUser } = userController;
 
-router.post('/create-user',  validateUserCreation,handleValidationErrors, createUser);
+router.post('/create-user',authMiddleware , isAdmin, validateUserCreation,handleValidationErrors, createUser);
 
 export default router;

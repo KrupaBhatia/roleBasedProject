@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Auth } from './auth/auth';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,13 @@ import { Component } from '@angular/core';
   standalone: false,
   styleUrl: './app.scss'
 })
+
 export class App {
-  protected title = 'role-product-app';
+  isLoggedIn = false;
+
+  constructor(private auth: Auth) {
+    this.auth.isLoggedIn$.subscribe(status => {
+      this.isLoggedIn = status;
+    });
+  }
 }
